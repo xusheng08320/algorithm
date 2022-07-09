@@ -46,7 +46,7 @@ public class LinkedListTest {
      * @return
      */
     public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode firstNode = new ListNode(0, head);
+        ListNode firstNode = new ListNode(0);
         ListNode last = firstNode;
         while (head != null) {
             ListNode endNode = getEndNode(head, k);
