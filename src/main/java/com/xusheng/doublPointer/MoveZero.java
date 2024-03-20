@@ -2,6 +2,8 @@ package com.xusheng.doublPointer;
 
 import org.junit.Test;
 
+import java.util.jar.JarEntry;
+
 public class MoveZero {
 
     @Test
@@ -14,22 +16,16 @@ public class MoveZero {
     }
 
     public void moveZeroes(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return;
-        }
-        int firstNotZeroIndex = 0;
+        int firstZeroIndex = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
-                swap(firstNotZeroIndex, i, nums);
-                firstNotZeroIndex++;
+                nums[firstZeroIndex] = nums[i];
+                if (i != firstZeroIndex) {
+                    nums[i] = 0;
+                }
+                firstZeroIndex++;
             }
         }
-    }
-
-    private void swap(int firstNotZeroIndex, int curIndex, int[] nums) {
-        int temp = nums[firstNotZeroIndex];
-        nums[firstNotZeroIndex] = nums[curIndex];
-        nums[curIndex] = temp;
     }
 
 }
