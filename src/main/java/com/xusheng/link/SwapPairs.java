@@ -10,17 +10,17 @@ public class SwapPairs {
     }
 
     public ListNode swapPairs(ListNode head) {
-        ListNode dummyHead = new ListNode();
-        dummyHead.next = head;
-        ListNode temp = dummyHead;
-        while (temp.next != null && temp.next.next != null ) {
-            ListNode node1 = temp.next;
-            ListNode node2 = temp.next.next;
-            temp.next = node2;
+        ListNode firstNode = new ListNode();
+        firstNode.next = head;
+        ListNode cur = firstNode;
+        while (cur.next != null && cur.next.next != null) {
+            ListNode node1 = cur.next;
+            ListNode node2 = cur.next.next;
             node1.next = node2.next;
             node2.next = node1;
-            temp = node1;
+            cur.next = node2;
+            cur = node1;
         }
-        return dummyHead.next;
+        return firstNode.next;
     }
 }
