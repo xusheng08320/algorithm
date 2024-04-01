@@ -20,17 +20,17 @@ public class Merge {
     }
 
     public int[][] merge(int[][] intervals) {
-        Arrays.sort(intervals, Comparator.comparingInt(arr -> arr[0]));
-        List<int[]> merged = new ArrayList<>();
+        Arrays.sort(intervals, Comparator.comparing(arr -> arr[0]));
+        List<int[]> result = new ArrayList<>();
         for (int i = 0; i < intervals.length; i++) {
             int left = intervals[i][0];
             int right = intervals[i][1];
-            if (merged.size() == 0 || merged.get(merged.size() - 1)[1] < left) {
-                merged.add(new int[]{left, right});
+            if (result.isEmpty() || result.get(result.size() - 1)[1] < left) {
+                result.add(new int[]{left, right});
                 continue;
             }
-            merged.get(merged.size() - 1)[1] = Math.max(right, merged.get(merged.size() - 1)[1]);
+            result.get(result.size() - 1)[1] = Math.max(right, result.get(result.size() - 1)[1]);
         }
-        return merged.toArray(new int[merged.size()][]);
+        return result.toArray(new int[result.size()][]);
     }
 }

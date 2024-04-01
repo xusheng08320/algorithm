@@ -17,22 +17,20 @@ public class LongestConsecutive {
         if (nums == null || nums.length == 0) {
             return 0;
         }
-        Set<Integer> numSet = new HashSet<>();
+        Set<Integer> set = new HashSet<>();
         for (int num : nums) {
-            numSet.add(num);
+            set.add(num);
         }
         int result = 0;
-        for (int num : nums) {
-            if (numSet.contains(num - 1)) {
+        for (int i = 0; i < nums.length; i++) {
+            if (set.contains(nums[i] - 1)) {
                 continue;
             }
-            int curLenth = 1;
-            int curNum = num;
-            while (numSet.contains(curNum + 1)) {
-                curLenth++;
-                curNum++;
+            int max = 1;
+            while (set.contains(nums[i] + max)) {
+                max++;
             }
-            result = Math.max(curLenth, result);
+            result = Math.max(result, max);
         }
         return result;
     }
