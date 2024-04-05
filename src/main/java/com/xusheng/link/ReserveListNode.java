@@ -1,18 +1,19 @@
 package com.xusheng.link;
 
+import org.junit.Test;
+
 public class ReserveListNode {
 
     public ListNode reverseList(ListNode head) {
         if (head == null) {
-            return head;
+            return null;
         }
-        ListNode cur = head;
         ListNode prev = null;
-        while (cur != null) {
-            ListNode next = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = next;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
         }
         return prev;
     }

@@ -20,48 +20,47 @@ public class ReserveKGroup {
     }
 
     public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode firstNode = new ListNode();
-        firstNode.next = head;
-        ListNode last = firstNode;
+        ListNode virtualHeadNode = new ListNode();
+        virtualHeadNode.next = head;
+        ListNode prev = virtualHeadNode;
         while (head != null) {
-            ListNode endNode = getEndNode(head, k);
-            if (endNode == null) {
-                return firstNode.next;
+            ListNode end = getEndNode(head, k);
+            if (end == null) {
+                return virtualHeadNode.next;
             }
-            ListNode nextGroupFirstNode = endNode.next;
-            reserveList(last, endNode);
-            last.next = endNode;
+            ListNode nextGroupFirstNode = end.next;
+            reverseNode(head, end);
             head.next = nextGroupFirstNode;
-            last = head;
+            prev.next = end;
+            prev = head;
             head = nextGroupFirstNode;
-
         }
-        return firstNode.next;
+        return virtualHeadNode.next;
+
     }
 
-    private ListNode getEndNode(ListNode curNode, int k) {
-        ListNode indexNode = curNode;
+    private void reverseNode(ListNode head, ListNode end) {
+        ListNode prev = null;
+        while (head != end) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        end.next = prev;
+    }
+
+    private ListNode getEndNode(ListNode head, int k) {
+        if (head == null) {
+            return null;
+        }
         for (int i = 0; i < k - 1; i++) {
-            if (indexNode.next == null) {
+            if (head.next == null) {
                 return null;
             }
-            indexNode = indexNode.next;
+            head = head.next;
         }
-        return indexNode;
-    }
-
-    private void reserveList(ListNode firstNode, ListNode endNode) {
-        if (firstNode == endNode) {
-            return;
-        }
-        ListNode prev = null;
-        while (firstNode != endNode) {
-            ListNode next = firstNode.next;
-            firstNode.next = prev;
-            prev = firstNode;
-            firstNode = next;
-        }
-        endNode.next = prev;
+        return head;
     }
 
 
