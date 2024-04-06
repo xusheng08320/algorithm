@@ -20,26 +20,25 @@ public class ReserveKGroup {
     }
 
     public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode virtualHeadNode = new ListNode();
-        virtualHeadNode.next = head;
-        ListNode prev = virtualHeadNode;
+        ListNode virtualHead = new ListNode();
+        virtualHead.next = head;
+        ListNode prev = virtualHead;
         while (head != null) {
             ListNode end = getEndNode(head, k);
             if (end == null) {
-                return virtualHeadNode.next;
+                return virtualHead.next;
             }
             ListNode nextGroupFirstNode = end.next;
-            reverseNode(head, end);
+            reserveNode(head, end);
             head.next = nextGroupFirstNode;
             prev.next = end;
             prev = head;
             head = nextGroupFirstNode;
         }
-        return virtualHeadNode.next;
-
+        return virtualHead.next;
     }
 
-    private void reverseNode(ListNode head, ListNode end) {
+    private void reserveNode(ListNode head, ListNode end) {
         ListNode prev = null;
         while (head != end) {
             ListNode next = head.next;
@@ -47,13 +46,10 @@ public class ReserveKGroup {
             prev = head;
             head = next;
         }
-        end.next = prev;
+        head.next = prev;
     }
 
     private ListNode getEndNode(ListNode head, int k) {
-        if (head == null) {
-            return null;
-        }
         for (int i = 0; i < k - 1; i++) {
             if (head.next == null) {
                 return null;
