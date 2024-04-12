@@ -1,17 +1,24 @@
 package com.xusheng.dp;
 
+import org.junit.Test;
+
 public class ClimbStairs {
 
+    @Test
+    public void test() {
+        int n = 3;
+        System.out.println(climbStairs(n));
+    }
+
     public int climbStairs(int n) {
-        if (n == 1) {
-            return 1;
+        int p = 0;
+        int pp = p;
+        int result = 1;
+        for (int i = 1; i <= n; i++) {
+            pp = p;
+            p = result;
+            result = p + pp;
         }
-        int[] arr = new int[n];
-        arr[0] = 1;
-        arr[1] = 2;
-        for (int i = 2; i < n; i++) {
-            arr[i] = arr[i - 1] + arr[i - 2];
-        }
-        return arr[n - 1];
+        return result;
     }
 }
