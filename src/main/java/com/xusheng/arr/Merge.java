@@ -25,8 +25,11 @@ public class Merge {
         for (int i = 0; i < intervals.length; i++) {
             int left = intervals[i][0];
             int right = intervals[i][1];
-            if (result.isEmpty() || result.get(result.size() - 1)[1] < left) {
-                result.add(new int[]{left, right});
+            if (result.size() == 0 || left > result.get(result.size() - 1)[1]) {
+                int[] arr = new int[2];
+                arr[0] = left;
+                arr[1] = right;
+                result.add(arr);
                 continue;
             }
             result.get(result.size() - 1)[1] = Math.max(right, result.get(result.size() - 1)[1]);
