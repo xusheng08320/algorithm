@@ -11,14 +11,16 @@ public class ClimbStairs {
     }
 
     public int climbStairs(int n) {
-        int p = 0;
-        int pp = p;
-        int result = 1;
-        for (int i = 1; i <= n; i++) {
-            pp = p;
-            p = result;
-            result = p + pp;
+        if (n <= 2) {
+            return n;
         }
-        return result;
+        int first = 1;
+        int second = 2;
+        for (int i = 2; i < n; i++) {
+            int temp = second;
+            second = first + second;
+            first = temp;
+        }
+        return second;
     }
 }
