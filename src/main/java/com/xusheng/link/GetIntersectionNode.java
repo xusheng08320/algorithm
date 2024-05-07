@@ -6,15 +6,12 @@ import java.util.Set;
 public class GetIntersectionNode {
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) {
-            return null;
+        ListNode curA = headA;
+        ListNode curB = headB;
+        while (curA != curB) {
+            curA = curA == null ? headB : curA.next;
+            curB = curB == null ? headA : curB.next;
         }
-        ListNode pA = headA;
-        ListNode pB = headB;
-        while (pA != pB) {
-            pA = pA == null ? headB : pA.next;
-            pB = pB == null ? headA : pB.next;
-        }
-        return pA;
+        return curA;
     }
 }

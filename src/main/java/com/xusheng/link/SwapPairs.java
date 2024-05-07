@@ -10,20 +10,19 @@ public class SwapPairs {
     }
 
     public ListNode swapPairs(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+        ListNode prev = dummyHead;
+        while (head != null && head.next != null) {
+            ListNode first = head;
+            ListNode second = head.next;
+            ListNode nextHead = second.next;
+            prev.next = second;
+            second.next = first;
+            first.next = nextHead;
+            prev = first;
+            head = nextHead;
         }
-        ListNode virtualHead = new ListNode();
-        virtualHead.next = head;
-        ListNode curNode = virtualHead;
-        while (curNode.next != null && curNode.next.next != null) {
-            ListNode node1 = curNode.next;
-            ListNode node2 = curNode.next.next;
-            node1.next = node2.next;
-            node2.next = node1;
-            curNode.next = node2;
-            curNode = node1;
-        }
-        return virtualHead.next;
+        return dummyHead.next;
     }
 }

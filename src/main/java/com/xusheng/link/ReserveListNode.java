@@ -5,9 +5,6 @@ import org.junit.Test;
 public class ReserveListNode {
 
     public ListNode reverseList(ListNode head) {
-        if (head == null) {
-            return null;
-        }
         ListNode prev = null;
         while (head != null) {
             ListNode next = head.next;
