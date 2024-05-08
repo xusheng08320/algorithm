@@ -11,22 +11,14 @@ public class MaxProduct {
     }
 
     public int maxProduct(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        if (nums.length == 1) {
-            return nums[0];
-        }
-        int maxDp = nums[0];
-        int minDp = nums[0];
+        int max = nums[0];
+        int min = nums[0];
         int result = nums[0];
-
         for (int i = 1; i < nums.length; i++) {
-            int maxF = maxDp;
-            int minF = minDp;
-            maxDp = Math.max(nums[i] * maxF, Math.max(nums[i], nums[i] * minF));
-            minDp = Math.min(nums[i] * maxF, Math.min(nums[i], nums[i] * minF));
-            result = Math.max(result, Math.max(maxDp, minDp));
+            int maxTemp = max;
+            max = Math.max(nums[i], Math.max(max * nums[i], min * nums[i]));
+            min = Math.min(nums[i], Math.min(maxTemp * nums[i], min * nums[i]));
+            result = Math.max(result, Math.max(max, min));
         }
         return result;
     }
