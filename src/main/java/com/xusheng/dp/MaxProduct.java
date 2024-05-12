@@ -1,6 +1,8 @@
 package com.xusheng.dp;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil;
 import org.junit.Test;
+import org.junit.experimental.max.MaxHistory;
 
 public class MaxProduct {
 
@@ -16,8 +18,8 @@ public class MaxProduct {
         int result = nums[0];
         for (int i = 1; i < nums.length; i++) {
             int maxTemp = max;
-            max = Math.max(nums[i], Math.max(max * nums[i], min * nums[i]));
-            min = Math.min(nums[i], Math.min(maxTemp * nums[i], min * nums[i]));
+            max = Math.max(nums[i], Math.max(nums[i] * min, nums[i] * max));
+            min = Math.min(nums[i], Math.min(nums[i] * min, nums[i] * maxTemp));
             result = Math.max(result, Math.max(max, min));
         }
         return result;
